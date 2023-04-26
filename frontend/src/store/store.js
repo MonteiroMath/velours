@@ -8,8 +8,9 @@ export const store = reactive({
 
     if (result.success) this.products = result.products
   },
-  async getProduct(id) {
-    let index = this.products.findIndex((product) => product.id === parseInt(id))
+  getProduct(id) {
+    let index = this.products.findIndex((product) => product.id == parseInt(id))
+
     return this.products[index]
   },
   async addProduct(product) {
@@ -17,9 +18,13 @@ export const store = reactive({
     if (result.success) this.products.push(result.product)
   },
   async editProduct(id, productData) {
-    let index = this.products.findIndex((product) => product.id === id)
+    let result = await updateProduct(productData)
 
-    this.products[index] = productData
+    if (result.success) {
+      let index = this.products.findIndex((product) => product.id === id)
+
+      this.products[index] = productData
+    }
   },
   async removeProduct(id) {
     this.products = this.products.filter((product) => product.id !== id)
@@ -55,7 +60,7 @@ const updateProduct = async (params) => {
     description,
     price,
     quantity,
-    image
+    image: 'www.google.com'
   })
 
   return response

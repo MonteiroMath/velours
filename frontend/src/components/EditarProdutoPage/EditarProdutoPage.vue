@@ -10,8 +10,7 @@ export default {
   },
   methods: {
     editProduct() {
-      store.editProduct(this.$route.params.id, this.formState)
-      this.$router.push('/')
+      store.editProduct(this.$route.params.id, this.formState).then(() => this.$router.push('/'))
     }
   }
 }
