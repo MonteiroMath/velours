@@ -13,7 +13,8 @@ export const store = reactive({
     return this.products[index]
   },
   async addProduct(product) {
-    this.products.push({ ...product, id: this.products.length }) //temp bad solution
+    let result = await postProduct(product)
+    if (result.success) this.products.push(result.product)
   },
   async editProduct(id, productData) {
     let index = this.products.findIndex((product) => product.id === id)
@@ -39,7 +40,7 @@ const postProduct = async (params) => {
     description,
     price: parseFloat(price),
     quantity: parseInt(quantity),
-    image
+    image: 'www.google.com'
   })
 
   return response

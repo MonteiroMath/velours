@@ -16,8 +16,7 @@ export default {
   },
   methods: {
     addProduct() {
-      store.addProduct(this.formState)
-      this.$router.push('/')
+      store.addProduct(this.formState).then(() => this.$router.push('/'))
     }
   }
 }
