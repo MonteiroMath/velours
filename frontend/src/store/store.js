@@ -19,10 +19,17 @@ export const store = reactive({
       quantity: 21
     }
   ],
+  getProduct(id) {
+    let index = this.products.findIndex((product) => product.id === parseInt(id))
+    return this.products[index]
+  },
   addProduct(product) {
-    console.log('here')
     this.products.push({ ...product, id: this.products.length }) //temp bad solution
-    console.log(this.products)
+  },
+  editProduct(id, productData) {
+    let index = this.products.findIndex((product) => product.id === id)
+
+    this.products[index] = productData
   },
   removeProduct(id) {
     this.products = this.products.filter((product) => product.id !== id)

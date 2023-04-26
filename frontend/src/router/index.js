@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
-//import HomeView from '../views/HomeView.vue'
 import ProductListPage from '../components/ProductListPage/ProductListPage.vue'
 import CadastrarProdutoPage from '../components/CadastrarProdutoPage/CadastrarProdutoPage.vue'
+import EditarProdutoPage from '../components/EditarProdutoPage/EditarProdutoPage.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -13,8 +13,13 @@ const router = createRouter({
     },
     {
       path: '/cadastrarProduto',
-      name: 'cadastrar-produto',
+      name: 'cadastrarProduto',
       component: CadastrarProdutoPage
+    },
+    {
+      path: '/editarProduto/:id',
+      name: 'editarProduto',
+      component: EditarProdutoPage
     }
   ]
 })

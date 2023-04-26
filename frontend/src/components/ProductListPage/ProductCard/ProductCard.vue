@@ -1,6 +1,15 @@
 <script>
+import IconEdit from '../../icons/IconEdit.vue'
+import IconDelete from '../../icons/IconDelete.vue'
+
 export default {
-  props: ['product']
+  props: ['product'],
+  methods: {
+    editProduct(id) {
+      this.$router.push(`/editarProduto/${id}`)
+    }
+  },
+  components: { IconEdit, IconDelete }
 }
 </script>
 
@@ -18,6 +27,9 @@ export default {
     <p>
       Quantidade: <span>{{ product.quantity }}</span>
     </p>
+
+    <IconEdit @click="editProduct(product.id)" />
+    <IconDelete />
   </div>
 </template>
 
