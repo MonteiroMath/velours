@@ -8,7 +8,10 @@ export default {
       store
     }
   },
-  components: { ProductCard }
+  components: { ProductCard },
+  created() {
+    store.getProducts()
+  }
 }
 </script>
 

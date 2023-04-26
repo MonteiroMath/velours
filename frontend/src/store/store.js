@@ -1,37 +1,67 @@
 import { reactive } from 'vue'
+import { client } from '../api/client'
 
 export const store = reactive({
-  products: [
-    {
-      id: 1,
-      name: 'celular',
-      category: 'eletrônicos',
-      description: 'quick description',
-      price: 599.99,
-      quantity: 32
-    },
-    {
-      id: 2,
-      name: 'boneco',
-      category: 'brinquedos',
-      description: 'quick description',
-      price: 80,
-      quantity: 21
-    }
-  ],
-  getProduct(id) {
+  products: [],
+  async getProducts() {
+    let result = await fetchProducts()
+
+    if (result.success) this.products = result.products
+  },
+  async getProduct(id) {
     let index = this.products.findIndex((product) => product.id === parseInt(id))
     return this.products[index]
   },
-  addProduct(product) {
+  async addProduct(product) {
     this.products.push({ ...product, id: this.products.length }) //temp bad solution
   },
-  editProduct(id, productData) {
+  async editProduct(id, productData) {
     let index = this.products.findIndex((product) => product.id === id)
 
     this.products[index] = productData
   },
-  removeProduct(id) {
+  async removeProduct(id) {
     this.products = this.products.filter((product) => product.id !== id)
   }
 })
+
+const fetchProducts = async () => {
+  const response = await client.get('/')
+  return response
+}
+
+const postProduct = async (params) => {
+  const { name, category, description, price, quantity, image } = params
+
+  const response = await client.post('/', {
+    name,
+    category,
+    description,
+    price: parseFloat(price),
+    quantity: parseInt(quantity),
+    image
+  })
+
+  return response
+}
+
+const updateProduct = async (params) => {
+  const { id, name, category, description, price, quantity, image } = params
+
+  const response = await client.put(`/${id}`, {
+    name,
+    category,
+    description,
+    price,
+    quantity,
+    image
+  })
+
+  return response
+}
+
+const deleteProduct = async (params) => {
+  const { id } = params
+  const response = await client.delete(`/${id}`)
+  return response
+}
