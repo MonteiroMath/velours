@@ -1,49 +1,56 @@
 <script>
+import { store } from '../../store/store.js'
+import ProductCard from './ProductCard/ProductCard.vue'
+
 export default {
-  data: () => {
+  data() {
     return {
-      products: [
-        {
-          name: 'celular',
-          category: 'eletrônicos',
-          description: 'quick description',
-          price: 599.99,
-          quantity: 32
-        },
-        {
-          name: 'boneco',
-          category: 'brinquedos',
-          description: 'quick description',
-          price: 80,
-          quantity: 21
-        }
-      ]
+      store
     }
-  }
+  },
+  components: { ProductCard }
 }
 </script>
 
 <template>
   <div class="container">
-    <div v-for="(product, index) in products" :key="`product-${index}`">
-      <p>
-        Nome: <span>{{ product.name }}</span>
-      </p>
-      <p>
-        Categoria: <span>{{ product.category }}</span>
-      </p>
-      <p>
-        Preço: <span>{{ product.price }}</span>
-      </p>
+    <button @click.prevent="this.$router.push('/cadastrarProduto')">Cadastrar produto</button>
+    <div class="productList">
+      <ProductCard
+        v-for="(product, index) in store.products"
+        :key="`product-${index}`"
+        :product="product"
+      />
     </div>
   </div>
 </template>
 
 <style>
 .container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
   margin-top: 25rem;
 
   line-height: 1.5;
   min-height: 100vh;
+}
+
+.productList {
+  margin-top: 30px;
+
+  width: 80%;
+  display: grid;
+  grid-template-columns: 1fr;
+
+  row-gap: 1rem;
+}
+
+@media screen and (min-width: 1024px) {
+  .productList {
+    grid-template-columns: 1fr 1fr;
+    column-gap: 3rem;
+  }
 }
 </style>
