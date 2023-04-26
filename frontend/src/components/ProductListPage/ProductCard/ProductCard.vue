@@ -1,4 +1,5 @@
 <script>
+import { store } from '../../../store/store'
 import IconEdit from '../../icons/IconEdit.vue'
 import IconDelete from '../../icons/IconDelete.vue'
 
@@ -7,6 +8,9 @@ export default {
   methods: {
     editProduct(id) {
       this.$router.push(`/editarProduto/${id}`)
+    },
+    deleteProduct(id) {
+      store.removeProduct(id)
     }
   },
   components: { IconEdit, IconDelete }
@@ -29,7 +33,7 @@ export default {
     </p>
 
     <IconEdit @click="editProduct(product.id)" />
-    <IconDelete />
+    <IconDelete @click="deleteProduct(product.id)" />
   </div>
 </template>
 

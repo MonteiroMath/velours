@@ -20,8 +20,8 @@ export default {
     <button @click.prevent="this.$router.push('/cadastrarProduto')">Cadastrar produto</button>
     <div class="productList">
       <ProductCard
-        v-for="(product, index) in store.products"
-        :key="`product-${index}`"
+        v-for="product in store.products"
+        :key="`product-${product.id}`"
         :product="product"
       />
     </div>

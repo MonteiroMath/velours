@@ -15,8 +15,6 @@ export async function client(endpoint, method, body) {
     config.body = JSON.stringify(body)
   }
 
-  console.log(body)
-
   const response = await fetch(baseUrl + endpoint, config)
 
   const data = await response.json()

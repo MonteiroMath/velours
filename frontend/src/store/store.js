@@ -9,7 +9,7 @@ export const store = reactive({
     if (result.success) this.products = result.products
   },
   getProduct(id) {
-    let index = this.products.findIndex((product) => product.id == parseInt(id))
+    let index = this.products.findIndex((product) => product.id == id)
 
     return this.products[index]
   },
@@ -27,6 +27,7 @@ export const store = reactive({
     }
   },
   async removeProduct(id) {
+    await deleteProduct({ id })
     this.products = this.products.filter((product) => product.id !== id)
   }
 })
