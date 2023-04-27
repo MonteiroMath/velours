@@ -17,7 +17,9 @@ export default {
 
 <template>
   <div class="container">
-    <button @click.prevent="this.$router.push('/cadastrarProduto')">Cadastrar produto</button>
+    <button class="btn btn-primary" @click.prevent="this.$router.push('/cadastrarProduto')">
+      Cadastrar produto
+    </button>
     <div class="productList">
       <ProductCard
         v-for="product in store.products"
