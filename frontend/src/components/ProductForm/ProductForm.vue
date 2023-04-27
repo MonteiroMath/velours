@@ -24,10 +24,17 @@ export default {
       store.editProduct(this.$route.params.id, this.formState).then(() => this.$router.push('/'))
     },
     submitForm() {
+      let isFormFilled = !Object.values(this.formState).some((element) =>
+        validator.isEmpty(element)
+      )
+
+      if (!isFormFilled) return alert('O formulário deve ser inteiramente preenchido.')
+
       let isFormInvalid = Object.values(this.error).some((element) => element)
 
-      if (isFormInvalid) alert('Há erros de validação para correção')
-      else this.edit ? this.editProduct() : this.addProduct()
+      if (isFormInvalid) return alert('Há erros de validação para correção')
+
+      this.edit ? this.editProduct() : this.addProduct()
     },
     validate(field, value) {
       const validators = {
