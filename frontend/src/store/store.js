@@ -9,6 +9,16 @@ export const store = reactive({
     if (result.success) this.products = result.products
   },
   getProduct(id) {
+    if (!id) {
+      return {
+        name: '',
+        category: '',
+        description: '',
+        price: '',
+        quantity: ''
+      }
+    }
+
     let index = this.products.findIndex((product) => product.id == id)
 
     return this.products[index]
