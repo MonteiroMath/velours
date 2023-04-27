@@ -10,12 +10,12 @@ const getProducts = (req, res, next) => {
 };
 
 const createProduct = (req, res, next) => {
-  const { name, category, description, price, quantity, image } = req.body;
+  const { name, category, price, quantity, image } = req.body;
 
-  if (!name || !category || !description || !price || !quantity || !image)
+  if (!name || !category || !price || !quantity || !image)
     throw new Error("Invalid request - Product data must be informed");
 
-  Products.create({ name, category, description, price, quantity, image })
+  Products.create({ name, category, price, quantity, image })
     .then((product) => res.json({ success: true, product }))
     .catch(next);
 };
@@ -37,11 +37,11 @@ const getProduct = (req, res, next) => {
 
 const updateProduct = (req, res, next) => {
   const { id } = req.params;
-  const { name, category, description, price, quantity, image } = req.body;
+  const { name, category, price, quantity, image } = req.body;
 
   Products.findByPk(id)
     .then((product) => {
-      product.set({ name, category, description, quantity, price, image });
+      product.set({ name, category, quantity, price, image });
 
       return product.save();
     })
