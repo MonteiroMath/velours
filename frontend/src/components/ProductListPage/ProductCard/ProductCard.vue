@@ -10,7 +10,8 @@ export default {
       this.$router.push(`/editarProduto/${id}`)
     },
     deleteProduct(id) {
-      store.removeProduct(id)
+      let confirmation = confirm('Deseja remover o produto? Essa operação não poderá ser defeita.')
+      if (confirmation) store.removeProduct(id)
     }
   },
   components: { IconEdit, IconDelete }
