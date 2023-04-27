@@ -1,5 +1,6 @@
 <script>
 import { store } from '../../store/store'
+import ProductForm from '../ProductForm/ProductForm.vue'
 
 export default {
   data() {
@@ -11,36 +12,19 @@ export default {
   methods: {
     editProduct() {
       store.editProduct(this.$route.params.id, this.formState).then(() => this.$router.push('/'))
+    },
+    updateState(field, value) {
+      this.formState[field] = value
     }
-  }
+  },
+  components: { ProductForm }
 }
 </script>
 
 <template>
   <div class="container">
     <header>Editar Produto</header>
-    <div class="formWrapper">
-      <div class="inputField">
-        <label>Nome*:</label>
-        <input type="text" v-model="formState.name" placeholder="Ex.: Moto G" />
-      </div>
-      <div class="inputField">
-        <label>Categoria*:</label>
-        <input type="text" v-model="formState.category" placeholder="Ex.: Celular" />
-      </div>
-      <div class="inputField">
-        <label>Preço*:</label>
-        <input type="text" v-model.number="formState.price" placeholder="Ex.: 500.00" />
-      </div>
-      <div class="inputField">
-        <label>Nome*:</label>
-        <input type="text" v-model.number="formState.quantity" placeholder="Ex.: 30" />
-      </div>
-      <div class="inputField">
-        <label>Descrição*:</label>
-        <input type="text" v-model="formState.description" placeholder="Ex.: Informações extras" />
-      </div>
-    </div>
+    <ProductForm @update-form="updateState" :formState="formState" />
 
     <div class="buttonWrapper">
       <button @click.prevent="this.$router.push('/')">Cancelar</button>
