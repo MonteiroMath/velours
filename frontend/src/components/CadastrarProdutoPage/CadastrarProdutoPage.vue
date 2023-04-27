@@ -29,12 +29,19 @@ export default {
 
 <template>
   <div class="container">
-    <header>Cadastrar Produto</header>
+    <header class="h1">Cadastrar Produto</header>
     <ProductForm @update-form="updateState" :formState="formState" />
 
     <div class="buttonWrapper">
-      <button @click.prevent="this.$router.push('/')">Cancelar</button>
-      <button @click.prevent="addProduct">Enviar</button>
+      <button class="btn btn-danger" @click.prevent="this.$router.push('/')">Cancelar</button>
+      <button class="btn btn-primary" @click.prevent="addProduct">Enviar</button>
     </div>
   </div>
 </template>
+
+<style>
+.buttonWrapper {
+  display: flex;
+  column-gap: 1rem;
+}
+</style>

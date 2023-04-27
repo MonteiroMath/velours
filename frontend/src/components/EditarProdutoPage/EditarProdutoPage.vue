@@ -23,12 +23,12 @@ export default {
 
 <template>
   <div class="container">
-    <header>Editar Produto</header>
+    <header class="h1">Editar Produto</header>
     <ProductForm @update-form="updateState" :formState="formState" />
 
     <div class="buttonWrapper">
-      <button @click.prevent="this.$router.push('/')">Cancelar</button>
-      <button @click.prevent="editProduct">Enviar</button>
+      <button class="btn btn-danger" @click.prevent="this.$router.push('/')">Cancelar</button>
+      <button class="btn btn-primary" @click.prevent="editProduct">Enviar</button>
     </div>
   </div>
 </template>
