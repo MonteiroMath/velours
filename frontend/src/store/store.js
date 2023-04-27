@@ -13,9 +13,9 @@ export const store = reactive({
       return {
         name: '',
         category: '',
-        description: '',
         price: '',
-        quantity: ''
+        quantity: '',
+        image: ''
       }
     }
 
@@ -48,30 +48,28 @@ const fetchProducts = async () => {
 }
 
 const postProduct = async (params) => {
-  const { name, category, description, price, quantity, image } = params
+  const { name, category, price, quantity, image } = params
 
   const response = await client.post('/', {
     name,
     category,
-    description,
     price: parseFloat(price),
     quantity: parseInt(quantity),
-    image: 'www.google.com'
+    image
   })
 
   return response
 }
 
 const updateProduct = async (params) => {
-  const { id, name, category, description, price, quantity, image } = params
+  const { id, name, category, price, quantity, image } = params
 
   const response = await client.put(`/${id}`, {
     name,
     category,
-    description,
-    price,
-    quantity,
-    image: 'www.google.com'
+    price: parseFloat(price),
+    quantity: parseInt(quantity),
+    image
   })
 
   return response
