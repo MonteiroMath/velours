@@ -9,6 +9,6 @@ export default {
 <template>
   <div class="container">
     <header class="h1">Editar Produto</header>
-    <ProductForm @update-form="updateState" :formState="formState" :edit="true" />
+    <ProductForm :edit="true" />
   </div>
 </template>

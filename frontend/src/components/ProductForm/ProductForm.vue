@@ -25,7 +25,7 @@ export default {
     },
     submitForm() {
       let isFormFilled = !Object.values(this.formState).some((element) =>
-        validator.isEmpty(element)
+        validator.isEmpty(String(element))
       )
 
       if (!isFormFilled) return alert('O formulário deve ser inteiramente preenchido.')
